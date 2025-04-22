@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Identificador de Triángulos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f0f0f0;
+    }
+    input {
+      margin: 10px;
+      padding: 8px;
+      width: 60px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 20px;
+    }
+    #resultado {
+      font-weight: bold;
+      margin: 20px;
+    }
+    canvas {
+      border: 1px solid #000;
+      margin-top: 20px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>¿Qué tipo de triángulo es?</h1>
+
+  <p>Ingresa los 3 lados del triángulo:</p>
+  <input type="number" id="lado1" placeholder="Lado 1">
+  <input type="number" id="lado2" placeholder="Lado 2">
+  <input type="number" id="lado3" placeholder="Lado 3">
+  <br>
+  <button onclick="verificarTriangulo()">Verificar</button>
+
+  <div id="resultado"></div>
+
+  <canvas id="canvas" width="400" height="100"></canvas>
+
+  <footer>
+    Diseñado por Ximena
+  </footer>
+
+  <script>
+    function verificarTriangulo() {
+      const a = parseFloat(document.getElementById("lado1").value);
+      const b = parseFloat(document.getElementById("lado2").value);
+      const c = parseFloat(document.getElementById("lado3").value);
+      const res = document.getElementById("resultado");
+
+      if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        res.innerText = "Por favor ingresa los tres lados correctamente.";
+        return;
+      }
+
+      if (a <= 0 || b <= 0 || c <= 0) {
+        res.innerText = "Los lados deben ser mayores a 0.";
+        return;
+      }
+
+      if (a + b > c && a + c > b && b + c > a) {
+        if (a === b && b === c) {
+          res.innerText = "Es un triángulo EQUILÁTERO.";
+        } else if (a === b || a === c || b === c) {
+          res.innerText = "Es un triángulo ISÓSCELES.";
+        } else {
+          res.innerText = "Es un triángulo ESCALENO.";
+        }
+      } else {
+        res.innerText = "Los lados no forman un triángulo válido.";
+      }
+    }
+
+    // Mostrar URL en canvas
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    ctx.font = "16px Arial";
+    ctx.fillText("URL de la página: https://tusitio.com/triangulo", 10, 50);
+  </script>
+</body>
+</html>
